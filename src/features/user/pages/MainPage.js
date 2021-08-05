@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../../components/common';
 import { Management } from '../components';
-import { getAllCity, getAllUser, selectCities, selectUserLoading, selectUsers } from '../userSlice';
+import { getAllUser, selectIsLogged, selectUserLoading, selectUsers } from '../userSlice';
 
 function MainPage() {
 
@@ -11,12 +11,15 @@ function MainPage() {
 
     const users = useSelector(selectUsers);
     const isLoading = useSelector(selectUserLoading);
-    const cities = useSelector(selectCities);
+    const isLogged = useSelector(selectIsLogged);
+    //const cities = useSelector(selectCities);
 
-    useEffect(() => {
-        unwrapResult(dispatch(getAllUser()));
-        unwrapResult(dispatch(getAllCity()));
-    }, []);
+
+
+    // useEffect(() => {
+    //     unwrapResult(dispatch(getAllUser()));
+    //     // unwrapResult(dispatch(getAllCity()));
+    // }, []);
 
     const initialYear = () => {
 
@@ -29,22 +32,33 @@ function MainPage() {
         return years;
     }
 
+    const onSearchTerm = () => {
+        console.log(isLogged);
+        console.log(unwrapResult(dispatch(getAllUser())));
+        if (isLoading) {
+            alert('a');
+        }
+    }
+
     const onDeleteUser = id => {
-        alert(id);
+        alert(isLoading);
     }
 
     return (
         <>
-            {
+            {/* {
                 isLoading ? <Loading /> :
                     <div>
                         <Management
                             users={users}
-                            cities={cities}
+                            // cities={cities}
                             years={initialYear()}
-                            deleteUser={onDeleteUser} />
+                            deleteUser={onDeleteUser}
+                            onSearchTerm={onSearchTerm}
+                        />
                     </div >
-            }
+            } */}
+            <button type="button" onClick={onSearchTerm}>x</button>
         </>
     )
 }
