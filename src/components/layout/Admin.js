@@ -1,20 +1,17 @@
-import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
-import { HeaderAnt } from '../common';
-import { Layout, Menu } from 'antd';
 import {
     AppstoreOutlined,
     BarChartOutlined,
     CloudOutlined,
     ShopOutlined,
-    TeamOutlined,
-    UserOutlined,
-    UploadOutlined,
-    VideoCameraOutlined,
+    TeamOutlined, UploadOutlined, UserOutlined
 } from '@ant-design/icons';
-
+import { Layout, Menu } from 'antd';
+import React from 'react';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import DashboardFeature from '../../features/dashboard';
 import UserFeature from '../../features/user';
+import { HeaderAnt } from '../common';
+
 
 const { Content, Footer, Sider } = Layout;
 
