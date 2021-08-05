@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userApi } from "../../api";
 
 export const onLogin = createAsyncThunk(
     'auth/onLogin',
     async () => {
-        const response = await userApi.getAllUser();
-        return response;
+
+        return new Promise((resolve) =>
+            setTimeout(() => resolve({ username: "134941", fullname: "Nguyễn Quốc Tấn" }), 1000)
+        );
     }
 )
 

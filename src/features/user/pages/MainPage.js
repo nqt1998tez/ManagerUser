@@ -3,23 +3,28 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../../components/common';
 import { Management } from '../components';
-import { getAllUser, selectIsLogged, selectUserLoading, selectUsers } from '../userSlice';
+import { getAllUser, selectUser } from '../userSlice';
+import { message } from 'antd';
 
 function MainPage() {
 
     const dispatch = useDispatch();
 
-    const users = useSelector(selectUsers);
-    const isLoading = useSelector(selectUserLoading);
-    const isLogged = useSelector(selectIsLogged);
-    //const cities = useSelector(selectCities);
+    const { users, isLoading } = useSelector(selectUser);
 
-
-
-    // useEffect(() => {
-    //     unwrapResult(dispatch(getAllUser()));
-    //     // unwrapResult(dispatch(getAllCity()));
-    // }, []);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                console.log(unwrapResult(await dispatch(getAllUser())));
+            } catch (error) {
+                message.error({
+                    content: "Load dữ liệu không thành công",
+                    duration: 1
+                });
+            }
+        }
+        fetchUser();
+    }, []);
 
     const initialYear = () => {
 
@@ -32,13 +37,13 @@ function MainPage() {
         return years;
     }
 
-    const onSearchTerm = () => {
-        console.log(isLogged);
-        console.log(unwrapResult(dispatch(getAllUser())));
-        if (isLoading) {
-            alert('a');
-        }
-    }
+    // const onSearchTerm = () => {
+    //     console.log(isLogged);
+    //     console.log(unwrapResult(dispatch(getAllUser())));
+    //     if (isLoading) {
+    //         alert('a');
+    //     }
+    // }
 
     const onDeleteUser = id => {
         alert(isLoading);
@@ -46,19 +51,16 @@ function MainPage() {
 
     return (
         <>
-            {/* {
+            {
                 isLoading ? <Loading /> :
                     <div>
                         <Management
                             users={users}
-                            // cities={cities}
                             years={initialYear()}
                             deleteUser={onDeleteUser}
-                            onSearchTerm={onSearchTerm}
                         />
                     </div >
-            } */}
-            <button type="button" onClick={onSearchTerm}>x</button>
+            }
         </>
     )
 }
