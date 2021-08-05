@@ -1,7 +1,7 @@
-import { Button } from 'antd'
-import React from 'react'
-import { DashboardAll, DashboardDistrict, DashboardUser, DashboardCity } from './components'
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button } from 'antd';
+import React from 'react';
+import { DashboardAll, DashboardCity, DashboardDistrict, DashboardUser } from './components';
 
 export default function DashboardFeature() {
 
