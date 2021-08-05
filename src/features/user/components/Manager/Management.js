@@ -7,15 +7,12 @@ const { Option } = Select;
 
 export function Management(props) {
 
-    const { years, users, deleteUser, onSearchTerm } = props;
+    const { years, users, deleteUser } = props;
 
     const onDeleteUser = id => {
         deleteUser(id);
     }
 
-    const searchTerm = () => {
-        onSearchTerm();
-    }
     return (
         <>
             <Row gutter={16}>
@@ -47,7 +44,7 @@ export function Management(props) {
                 </Col>
                 <Col span={6}>
                     <label className="select2">&nbsp;</label> <br />
-                    <Button type="primary" onClick={searchTerm}>
+                    <Button type="primary">
                         <SearchOutlined />
                         Tìm
                     </Button>
