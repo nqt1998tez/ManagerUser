@@ -7,10 +7,14 @@ const { Option } = Select;
 
 export function Management(props) {
 
-    const { years, users } = props;
+    const { years, users, deleteUser, onSearchTerm } = props;
 
     const onDeleteUser = id => {
-        alert(id);
+        deleteUser(id);
+    }
+
+    const searchTerm = () => {
+        onSearchTerm();
     }
     return (
         <>
@@ -42,8 +46,8 @@ export function Management(props) {
                     </Select>
                 </Col>
                 <Col span={6}>
-                    <label className="select2"></label>
-                    <Button type="primary" >
+                    <label className="select2">&nbsp;</label> <br />
+                    <Button type="primary" onClick={searchTerm}>
                         <SearchOutlined />
                         Tìm
                     </Button>

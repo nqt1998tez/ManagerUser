@@ -20,7 +20,8 @@ export const getAllCity = createAsyncThunk(
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        loading: true,
+        loading: false,
+        isLogged: true,
         users: [],
         cities: []
     },
@@ -29,15 +30,18 @@ export const userSlice = createSlice({
         builder
             .addCase(getAllUser.pending, (state) => {
                 state.loading = true;
+                state.users = [];
+                state.isLogged = true;
             })
             .addCase(getAllUser.fulfilled, (state, action) => {
                 state.loading = false;
+                state.isLogged = false;
                 state.users = action.payload;
             })
-            .addCase(getAllCity.fulfilled, (state, action) => {
-                state.cities = action.payload;
-                state.loading = false;
-            })
+        // .addCase(getAllCity.fulfilled, (state, action) => {
+        //     state.cities = action.payload;
+        //     state.loading = false;
+        // })
     }
 
 });
@@ -45,7 +49,8 @@ export const userSlice = createSlice({
 export const selectUsers = (state) => state.user.users;
 
 export const selectUserLoading = (state) => state.user.loading;
+export const selectIsLogged = (state) => state.user.isLogged;
 
-export const selectCities = (state) => state.user.cities;
+// export const selectCities = (state) => state.user.cities;
 
 export default userSlice.reducer;
