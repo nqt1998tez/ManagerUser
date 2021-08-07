@@ -1,12 +1,12 @@
 import axiosClient from "./axiosClient";
 
 export const userApi = {
-    getAllUser: () => {
+    getAllUser: (params) => {
         const url = '/users'
-        return axiosClient.get(url)
+        return axiosClient.get(url,{params})
     },
     deleteUser: params => {
         const url = `/users/${params}`
         return axiosClient.delete(url);
-    }
+    },
 }

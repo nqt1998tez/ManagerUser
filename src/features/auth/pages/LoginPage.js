@@ -4,30 +4,21 @@ import { Button, Card } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Utilities } from "../../../components/common";
 import { onLogin, selectAuth } from '../authSlice';
-
 
 export default function LoginPage() {
 
+    const history = useHistory();
     const auth = useSelector(selectAuth);
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleLogin = async () => {
-        try {
-            const response = unwrapResult(await dispatch(onLogin()));
-
-            if (!Utilities.isNullOrEmpty(response)) {
-                history.push("/admin");
-            }
-        } catch (error) {
-            console.log(error.message);
+        const response = unwrapResult(await dispatch(onLogin()));
+        if (response.isLoggedIn) {
+            history.push("/admin");
         }
     }
-
-    console.log(auth);
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#ececec', height: '100vh' }}>

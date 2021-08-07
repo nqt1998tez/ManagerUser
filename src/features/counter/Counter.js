@@ -18,10 +18,7 @@ export function Counter() {
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   const incrementValue = Number(incrementAmount) || 0;
-  const a = () => {
-    dispatch(incrementAsync(incrementValue));
-    console.log(count1);
-  }
+  
   return (
     <div>
       <div className={styles.row}>

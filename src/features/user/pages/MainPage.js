@@ -15,7 +15,12 @@ function MainPage() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                console.log(unwrapResult(await dispatch(getAllUser())));
+
+                const objA={
+                    A:5,
+                    B:6
+                }
+                console.log(unwrapResult(await dispatch(getAllUser(objA))));
             } catch (error) {
                 message.error({
                     content: "Load dữ liệu không thành công",

@@ -3,8 +3,8 @@ import { userApi } from "../../api";
 
 export const getAllUser = createAsyncThunk(
     'user/getAllUser',
-    async () => {
-        const response = await userApi.getAllUser();
+    async (params) => {
+        const response = await userApi.getAllUser(params);
         return response;
     }
 )
