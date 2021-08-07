@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 export const userApi = {
-    getAllUser: (params) => {
+    getAllUser: () => {
         const url = '/users'
-        return axiosClient.get(url,{params})
+        return axiosClient.get(url)
     },
     deleteUser: params => {
         const url = `/users/${params}`

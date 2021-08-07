@@ -7,15 +7,17 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import DashboardFeature from '../../features/dashboard';
 import UserFeature from '../../features/user';
-import { HeaderAnt } from '../common';
+import { HeaderAnt, Utilities } from '../common';
 
 
 const { Content, Footer, Sider } = Layout;
 
 export function AdminLayout() {
+
+    const location = useLocation();
 
     return (
         <Layout>
@@ -28,10 +30,9 @@ export function AdminLayout() {
                 }}
             >
                 <div className="logo"></div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={[Utilities.selectedKeys(location.pathname)]}>
                     <Menu.Item key="1" icon={<UserOutlined />}>
-
-                        <Link to="/admin/dashborad" style={{ textDecoration: 'none' }}>Dashboard</Link>
+                        <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
                     </Menu.Item>
 
                     <Menu.Item key="2" icon={<UserOutlined />}>
@@ -63,13 +64,17 @@ export function AdminLayout() {
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                     <div className="site-layout-background" style={{ padding: 24 }}>
                         <Switch>
-                            <Redirect exact from="/admin" to="/admin/dashborad" />
-                            <Route path="/admin/dashborad">
+                            <Redirect exact from="/admin" to="/admin/dashboard" />
+                            <Route path="/admin/dashboard">
                                 <DashboardFeature />
                             </Route>
-                            
+
                             <Route path="/admin/users">
                                 <UserFeature />
+                            </Route>
+
+                            <Route>
+                                <Redirect to=""/>
                             </Route>
                         </Switch>
                     </div>
