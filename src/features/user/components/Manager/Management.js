@@ -67,7 +67,7 @@ export function Management(props) {
                         <Controller
                             render={({ field }) => {
                                 return (
-                                    <Select {...field} className="select2"  >
+                                    <Select {...field} className="select2" showSearch >
                                         <Option value="-1">---</Option>
                                         {initialYear().map(item => {
                                             return (
