@@ -16,7 +16,7 @@ export default function LoginPage() {
     const handleLogin = async () => {
         const response = unwrapResult(await dispatch(onLogin()));
         if (response.isLoggedIn) {
-            history.push("/admin");
+            history.push("/thong-ke");
         }
     }
 

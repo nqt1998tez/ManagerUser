@@ -1,11 +1,13 @@
 import axios from "axios";
 import queryString from 'querystring';
+import { BASE_URL } from "../components/common";
 
 
 const axiosClient = axios.create({
-    baseURL: 'https://609ba3272b549f00176e4191.mockapi.io/',
+    baseURL: BASE_URL,
     headers: {
         'content-type': 'application/json',
+        'AuthenKey': 'GroundKey'
     },
     paramsSerializer: params => queryString.stringify(params)
 })

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../../components/common';
 import { Management } from '../components';
-import { getAllUser, selectUser } from '../userSlice';
+import { getProvince, selectHouseForRent } from '../houseForRentSlice';
 
 function MainPage() {
 
     const dispatch = useDispatch();
 
-    const { users, isLoading } = useSelector(selectUser);
+    const { users, isLoading } = useSelector(selectHouseForRent);
     const [filter, setFilter] = useState({
         keySearch: '',
         gender: "-1",
@@ -18,14 +18,14 @@ function MainPage() {
     const [isSearch, setIsSearch] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllUser());
+        dispatch(getProvince());
     }, [isSearch]);
 
     const onDeleteUser = id => {
         alert(id);
     }
 
-    const searchData = users.filter(item => item.name.includes(filter.keySearch.trim()));
+    const searchData = [];
 
     return (
         <>
@@ -39,7 +39,7 @@ function MainPage() {
                             setFilter={setFilter}
                             setIsSearch={setIsSearch}
                         />
-                    </div >
+                    </div>
             }
         </>
     )

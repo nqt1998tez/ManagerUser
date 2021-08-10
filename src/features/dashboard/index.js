@@ -3,16 +3,16 @@ import { Button } from 'antd';
 import React from 'react';
 import { DashboardAll, DashboardCity, DashboardDistrict, DashboardUser } from './components';
 
-export default function DashboardFeature() {
+export default function Dashboard() {
 
     return (
         <div>
 
             <Button type="primary" icon={<SearchOutlined />}> Tìm</Button>
-            <DashboardAll />
+            {/* <DashboardAll />
             <DashboardUser />
             <DashboardCity />
-            <DashboardDistrict />
+            <DashboardDistrict /> */}
         </div>
     )
 }
