@@ -36,30 +36,30 @@ export function AdminLayout() {
                 <div className="logo"></div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={[Utilities.selectedKeys(location.pathname)]}>
                     <Menu.Item key="1" icon={<AreaChartOutlined />}>
-                        <Link to="/thong-ke" style={{ textDecoration: 'none' }}>Thống kê</Link>
+                        <Link to="/mat-bang" style={{ textDecoration: 'none' }}>Thống kê</Link>
                     </Menu.Item>
 
                     <Menu.Item key="2" icon={<UploadOutlined />} >
-                        <Link to="/thong-ke/mat-bang-co-hoi" style={{ textDecoration: 'none' }}>Mặt bằng cơ hội</Link>
+                        <Link to="/mat-bang/mat-bang-co-hoi" style={{ textDecoration: 'none' }}>Mặt bằng cơ hội</Link>
                     </Menu.Item>
 
                     <Menu.Item key="3" icon={<UploadOutlined />}>
-                        <Link to="/truc-duong" style={{ textDecoration: 'none' }}>Trục đường</Link>
+                        <Link to="/mat-bang/truc-duong" style={{ textDecoration: 'none' }}>Trục đường</Link>
                     </Menu.Item>
                     <Menu.Item key="4" icon={<BarChartOutlined />}>
-                        <Link to="/doan-quy-hoach" style={{ textDecoration: 'none' }}>Đoạn quy hoạch</Link>
+                        <Link to="/mat-bang/doan-quy-hoach" style={{ textDecoration: 'none' }}>Đoạn quy hoạch</Link>
                     </Menu.Item>
                     <Menu.Item key="5" icon={<CloudOutlined />}>
-                        <Link to="/truc-duong" style={{ textDecoration: 'none' }}>Mặt bằng mục tiêu</Link>
+                        <Link to="/mat-bang/truc-duong" style={{ textDecoration: 'none' }}>Mặt bằng mục tiêu</Link>
                     </Menu.Item>
                     <Menu.Item key="6" icon={<AppstoreOutlined />}>
-                        <Link to="/diem-mat-bang" style={{ textDecoration: 'none' }}>Điểm mặt bằng</Link>
+                        <Link to="/mat-bang/diem-mat-bang" style={{ textDecoration: 'none' }}>Điểm mặt bằng</Link>
                     </Menu.Item>
                     <Menu.Item key="7" icon={<TeamOutlined />}>
-                        <Link to="/yeu-cau-diem-mat-bang" style={{ textDecoration: 'none' }}>Yêu cầu điểm mặt bằng</Link>
+                        <Link to="/mat-bang/yeu-cau-diem-mat-bang" style={{ textDecoration: 'none' }}>Yêu cầu điểm mặt bằng</Link>
                     </Menu.Item>
                     <Menu.Item key="8" icon={<UserOutlined />}>
-                        <Link to="/co-cau-nhan-su" style={{ textDecoration: 'none' }}>Cơ cấu nhân sự</Link>
+                        <Link to="/mat-bang/co-cau-nhan-su" style={{ textDecoration: 'none' }}>Cơ cấu nhân sự</Link>
                     </Menu.Item>
                 </Menu>
             </Sider>
@@ -68,34 +68,35 @@ export function AdminLayout() {
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                     <div className="site-layout-background" style={{ padding: 24 }}>
                         <Switch>
-                            <Route path="/thong-ke">
+                            <Route path="/mat-bang" exact>
                                 <Dashboard />
                             </Route>
 
-                            <Route path="/thong-ke/mat-bang-co-hoi" component={<HouseForRent />}>
+                            <Route path="/mat-bang/mat-bang-co-hoi">
+                                <HouseForRent />
                             </Route>
 
-                            <Route path="/thong-ke/doan-quy-hoach" component={<PlanningRoad />}>
-
+                            <Route path="/mat-bang/doan-quy-hoach" >
+                                <PlanningRoad />
                             </Route>
 
-                            <Route path="/mat-bang-muc-tieu">
+                            <Route path="/mat-bang/mat-bang-muc-tieu">
                                 <TargetGround />
                             </Route>
 
-                            <Route path="/truc-duong">
+                            <Route path="/mat-bang/truc-duong">
                                 <RoadAxis />
                             </Route>
 
-                            <Route path="/diem-mat-bang">
+                            <Route path="/mat-bang/diem-mat-bang">
                                 <StorePoint />
                             </Route>
 
-                            <Route path="/yeu-cau-diem-mat-bang">
+                            <Route path="/mat-bang/yeu-cau-diem-mat-bang">
                                 <StorePointRequest />
                             </Route>
 
-                            <Route path="/co-cau-nhan-su">
+                            <Route path="/mat-bang/co-cau-nhan-su">
                                 <UserGround />
                             </Route>
 

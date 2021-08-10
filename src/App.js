@@ -13,7 +13,7 @@ function App() {
                 <AuthFeature></AuthFeature>
             </Route>
 
-            <PrivateRoute path="/thong-ke">
+            <PrivateRoute path="/mat-bang">
                 <AdminLayout />
             </PrivateRoute>
 

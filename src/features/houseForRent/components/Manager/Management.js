@@ -8,18 +8,8 @@ export function Management(props) {
 
     const { control, handleSubmit } = useForm();
 
-    const { users, deleteUser, filter, setFilter, setIsSearch } = props;
-
-    const initialYear = () => {
-        const years = [];
-        const year = new Date().getFullYear();
-        for (let index = 1980; index <= year; index++) {
-            years.push({ year: index });
-        }
-        years.sort((elm1, elm2) => { return elm2.year - elm1.year });
-        return years;
-
-    }
+    const { users, deleteUser, filter, setFilter, setIsSearch, provinces,
+        districts, wards, lstRoadAxis, loadRoadAxis, loadWard } = props;
 
     const onDeleteUser = id => {
         deleteUser(id);
@@ -28,6 +18,18 @@ export function Management(props) {
     const onSubmit = data => {
         setFilter(data);
         setIsSearch(true);
+    }
+
+    const handleProvice = provinceID => {
+        setFilter({ ...filter, provinceID: provinceID });
+    }
+
+    const handleDistrict = districtID => {
+        setFilter({ ...filter, districtID: districtID })
+        loadWard(districtID);
+        if (filter.provinceID != "-1" && districtID != "-1") {
+            loadRoadAxis(filter.provinceID, districtID);
+        }
     }
 
     return (
@@ -41,54 +43,131 @@ export function Management(props) {
                             control={control}
                             defaultValue={filter.keySearch}
                             name="keySearch"
+
                         />
                     </Col>
 
                     <Col span={6}>
-                        <label className="control-label">Giới tính</label>
+                        <label className="control-label">Tỉnh / TP</label>
                         <br />
                         <Controller
                             render={({ field }) => {
                                 return (
-                                    <Select {...field} className="select2">
+                                    <Select
+                                        {...field} className="select2"
+                                        optionFilterProp="children"
+                                        showSearch
+                                        onSelect={handleProvice}
+                                        filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                    >
                                         <Option value="-1">---</Option>
-                                        <Option value="0">Nam</Option>
-                                        <Option value="1">Nữ</Option>
+                                        {
+                                            provinces.map(item => {
+                                                return (
+                                                    <Option value={item.ProvinceID} key={item.ProvinceID}>{item.ProvinceName}</Option>
+                                                )
+                                            })
+                                        }
                                     </Select>
                                 )
                             }}
                             control={control}
-                            defaultValue={filter.gender}
-                            name="gender"
+                            defaultValue={filter.provinceID}
+                            name="provinceID"
                         />
                     </Col>
                     <Col span={6}>
-                        <label className="control-label">Năm sinh</label>
+                        <label className="control-label">Quận / Huyện</label>
                         <Controller
                             render={({ field }) => {
                                 return (
-                                    <Select {...field} className="select2" showSearch >
+                                    <Select {...field}
+                                        className="select2"
+                                        optionFilterProp="children"
+                                        showSearch
+                                        onSelect={handleDistrict}
+                                        filterOption={(input, option) =>
+                                            option.children.toString().toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }>
                                         <Option value="-1">---</Option>
-                                        {initialYear().map(item => {
+                                        {districts.map(item => {
                                             return (
-                                                <Option value={item.year} key={item.year}> {item.year}</Option>
+                                                <Option value={item.DistrictID} key={item.DistrictID} > {item.DistrictName}</Option>
                                             )
                                         })}
                                     </Select>
                                 )
                             }}
                             control={control}
-                            defaultValue={filter.year}
-                            name="year"
+                            defaultValue={filter.districtID}
+                            name="districtID"
                         />
                     </Col>
                     <Col span={6}>
-                        <label className="select2">&nbsp;</label> <br />
-                        <Button icon={<SearchOutlined />} type="primary" htmlType="submit">
+                        <label className="control-label">Phường / Xã</label>
+                        <Controller
+                            render={({ field }) => {
+                                return (
+                                    <Select {...field} className="select2"
+                                        optionFilterProp="children"
+                                        showSearch
+                                        filterOption={(input, option) =>
+                                            option.children.toString().toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }>
+                                        <Option value="-1">---</Option>
+                                        {wards.map(item => {
+                                            return (
+                                                <Option value={item.WardID} key={item.WardID} > {item.WardName}</Option>
+                                            )
+                                        })}
+                                    </Select>
+                                )
+                            }}
+                            control={control}
+                            defaultValue={filter.wardID}
+                            name="wardID"
+                        />
+                    </Col>
+                </Row >
+                <Row gutter={16} className="form-group">
+                    <Col span={6}>
+                        <label className="control-label">Trục đường</label>  <br />
+                        <Controller
+                            render={({ field }) => {
+                                return (
+                                    <Select
+                                        {...field} className="select2"
+                                        optionFilterProp="children"
+                                        showSearch
+                                        filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                    >
+                                        <Option value="-1">---</Option>
+                                        {
+                                            lstRoadAxis.map(item => {
+                                                return (
+                                                    <Option value={item.RoadAxisID} key={item.RoadAxisID}>{item.RoadAxisName}</Option>
+                                                )
+                                            })
+                                        }
+                                    </Select>
+                                )
+                            }}
+                            control={control}
+                            defaultValue={filter.roadAxisID}
+                            name="roadAxisID"
+                        />
+                    </Col>
+                    <Col span={18}>
+                        <label className="control-label">Thao tác</label>  <br />
+                        <Button icon={<SearchOutlined />} type="primary" htmlType='submit'>
                             Tìm
                         </Button>
                     </Col>
-                </Row >
+                </Row>
             </form>
 
             <Row className="mt-1">

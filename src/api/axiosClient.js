@@ -1,15 +1,13 @@
 import axios from "axios";
 import queryString from 'querystring';
-import { BASE_URL } from "../components/common";
-
 
 const axiosClient = axios.create({
-    baseURL: BASE_URL,
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     headers: {
-        'content-type': 'application/json',
-        'AuthenKey': 'GroundKey'
+        "Content-Type": "application/json",
+        AuthenKey: 'GroundKey',
     },
-    paramsSerializer: params => queryString.stringify(params)
+    paramsSerializer: (params) => queryString.stringify(params)
 })
 
 axiosClient.interceptors.request.use(async config => {
