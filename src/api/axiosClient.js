@@ -1,13 +1,13 @@
 import axios from "axios";
 import queryString from 'querystring';
 
-
 const axiosClient = axios.create({
-    baseURL: 'https://609ba3272b549f00176e4191.mockapi.io/',
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     headers: {
-        'content-type': 'application/json',
+        "Content-Type": "application/json",
+        AuthenKey: 'GroundKey',
     },
-    paramsSerializer: params => queryString.stringify(params)
+    paramsSerializer: (params) => queryString.stringify(params)
 })
 
 axiosClient.interceptors.request.use(async config => {

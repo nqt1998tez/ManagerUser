@@ -13,7 +13,7 @@ function App() {
                 <AuthFeature></AuthFeature>
             </Route>
 
-            <PrivateRoute path="/admin">
+            <PrivateRoute path="/mat-bang">
                 <AdminLayout />
             </PrivateRoute>
 

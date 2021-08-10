@@ -4,11 +4,11 @@ export const Utilities = {
         return str === null || str === "" || str === undefined
     },
     selectedKeys: (path) => {
-        if (path ==="/admin" || path==="/admin/dashboard") {
+        if (path === "/thong-ke") {
             return '1';
         }
 
-        if (path==="/admin/users") {
+        if (path === "/thong-ke/mat-bang-co-hoi") {
             return '2';
         }
     }
